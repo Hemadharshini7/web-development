@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width-device-width, initial-scale-1.0">
+       <title>LOGIN FORM</title>
+
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+       <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous">
+       </script>
+       <style>
+            body{
+                background-image: url("pexels-lumn-167699.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            .custome-title{
+                text-align: center;
+                font-weight: bold;
+            }
+
+            input{
+                border-radius: unset !important;
+            }
+            button{
+                border-radius: unset !important;
+                float: right;
+                margin: 0.4rem;
+            }
+            .card{
+                border-radius: unset !important;
+                margin-top: 3rem;
+                box-shadow: 0px 10px 10px 10px #a9a1a1;
+            }
+       </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="col-md-3"></div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                            <h4 class="custome-title">Enter user Info</h4>
+                    </div>
+                    <div class="card-body">
+                            <div class="form-group">
+                                    <label>Enter name:</label>
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Enter name" />
+                            </div>
+                            <div class="form-group">
+                                <label>Entercontact:</label>
+                                <input type="text" class="form-control" id="cont" placeholder="Enter contact number" />
+                            </div>
+                            <div class="form-group">
+                                <label>Enter email:</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter email" />
+                            </div>
+                            <div class="form-group">
+                                <label>Enter username:</label>
+                                <input type="text" class="form-control" id="uname" placeholder="Enter username" />
+                            </div>
+                            <div class="form-group">
+                                 <button class="btn btn-warning" onclick="clearField()">Clear</button>
+                                 <button class="btn btn-primary" id="submitBtn">Submit</button>
+                            </div>
+
+                    </div>
+                    <div class="card-footer">
+                            <div id="response">
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+                $("#submitBtn").click(function(){
+                    var name=$("#name").val();
+                    var email=$("#email").val();
+                    var contact=$("#cont").val();
+                    var username=$("#uname").val();
+
+                    $.post("http://localhost:4000/api/addPerson",{
+                        name:name,
+                        email:email,
+                        cont:contact,
+                        uname:username
+                    },function(response){
+                            $("#response").html("<div class='alert alert-success'>"+response.message+"</div>")
+                            clearField();
+                    })
+                })
+
+                function clearField(){
+                    $("#name").val("");
+                    $("#email").val("");
+                    $("#cont").val("");
+                    $("#uname").val("");
+                }
+        </script>
+    </body>
+</html>

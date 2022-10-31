@@ -1,0 +1,21 @@
+  <h3 class='text-center text-muted mb-3'>Flask - SQLite CRUD Application</h3>
+  <p class='text-right'><a href='{{url_for("add_user")}}' class='btn btn-success '>+Add User</a></p>
+  <table class='table table-bordered'>
+    <thead>
+      <th>Name</th>
+      <th>Contact</th>
+      <th>email</th>
+      <th>username</th>
+    </thead>
+    <tbody>
+      {% for row in datas %}
+        <tr>
+          <td>{{data.name}}</td>
+          <td>{{data.cont}}</td>
+          <td>{{data.email}}</td>
+          <td>{{data.uname}}</td>
+          <td><a href='{{url_for("delete_user",name=data.name)}}' class='btn btn-danger' onclick='return confirm("Are You Sure")'>Delete</a></td>
+        </tr>
+      {%endfor%}
+    </tbody>
+  </table>
